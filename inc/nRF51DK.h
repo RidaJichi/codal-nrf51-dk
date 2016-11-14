@@ -61,7 +61,7 @@ DEALINGS IN THE SOFTWARE.
 //#include "DeviceDisplay.h"
 
 #include "DeviceFiber.h"
-//#include "DeviceMessageBus.h"
+#include "DeviceMessageBus.h"
 
 //#include "DeviceBLEManager.h"
 //#include "DeviceRadio.h"
@@ -106,7 +106,7 @@ class nRF51DK
     //nRF51DKI2C                 i2c;
 
     // Device level Message Bus abstraction
-    //nRF51DKMessageBus          messageBus;
+    DeviceMessageBus          messageBus;
 
     // Member variables to represent each of the core components on the device.
     //nRF51DKDisplay             display;

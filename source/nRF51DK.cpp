@@ -46,7 +46,8 @@ CodalDevice device;
 
 nRF51DK::nRF51DK() :
     io(),
-    buttonA(DEVICE_PIN_BUTTON_A, DEVICE_ID_BUTTON_A, DEVICE_BUTTON_ALL_EVENTS, PullUp)
+    messageBus(),
+    buttonA(DEVICE_PIN_BUTTON_A, DEVICE_ID_BUTTON_A, DEVICE_BUTTON_ALL_EVENTS, PullUp),
     buttonB(DEVICE_PIN_BUTTON_B, DEVICE_ID_BUTTON_B, DEVICE_BUTTON_ALL_EVENTS, PullUp)
 {
     // Clear our status
@@ -79,7 +80,7 @@ void nRF51DK::init()
 #endif
 
     // Bring up fiber scheduler.
-    //scheduler_init(messageBus);
+    scheduler_init(messageBus);
 
     // Seed our random number generator
     //seedRandom();
@@ -87,7 +88,7 @@ void nRF51DK::init()
     // Create an event handler to trap any handlers being created for I2C services.
     // We do this to enable initialisation of those services only when they're used,
     // which saves processor time, memeory and battery life.
-    //messageBus.listen(DEVICE_ID_MESSAGE_BUS_LISTENER, DEVICE_EVT_ANY, this, &nRF51DK::onListenerRegisteredEvent);
+    messageBus.listen(DEVICE_ID_MESSAGE_BUS_LISTENER, DEVICE_EVT_ANY, this, &nRF51DK::onListenerRegisteredEvent);
 
     status |= NRF51DK_INITIALIZED;
 
